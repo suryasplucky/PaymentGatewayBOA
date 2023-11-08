@@ -30,7 +30,7 @@ const LogFileName = 'cybs';
 const LogDirectory = '../log';
 const LogfileMaxSize = '5242880'; 
 
-const APP_URL_SITE = 'http://localhost:3000';
+const APP_URL_SITE = 'http://paymentgateway.cybersource.com';
 
 
 var configObj = {
