@@ -1,0 +1,91 @@
+<html lang="en">
+    <head>
+        <title>Token</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+        <style>
+            .td-1 {
+                word-break: break-all;
+                word-wrap: break-word;
+            }
+        </style>
+    </head>
+    
+    <body>
+            <!-- Company Overview Heder START -->
+    <header>
+        <div class="page-contentss" style="background: url('<%= 'https://onlinetraining.drgarciabiomagnetism.com/images/pages/pay/banner.png' %>'); background-size: cover; background-repeat: no-repeat;">  
+            <!-- Image Logo -->
+            <a class="navbar-brand logo-image ml-5" href="https://adyenlms.usbiomag.com">
+              <img src="https://onlinetraining.drgarciabiomagnetism.com/images/biomag-logo.png" class="w-50 pl-3" alt="alternative">
+            </a>  
+            <div class="container px-0 mx-0">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="" style="padding: 35px;">
+                            <h1 style="padding-bottom: 20px; color: #fff; text-transform: uppercase; font-weight: 700;">
+                                Payment Processing</h1>
+                            <h6 style="color: #fff; text-transform: uppercase;">
+                                <a style="color: #fff; text-transform: uppercase;" href="https://adyenlms.usbiomag.com" class="color-white">HOME </a>/ <a style="color: #fff; text-transform: uppercase;" class="color-white" href="javascript:location.reload(true);">Payment Processing</a>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </header>
+      <br> 
+        <div class="container card">
+            <div class="card-body">
+                 <form action="/receipt" id="my-token-form" method="post">
+                    <h1>Token</h1>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Key</th>
+                                <th scope="col">value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr scope="row">
+                                <td>Transient Token</td>
+                                <td id="Tokens">
+                                    <%=flexresponse%>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <button type="button" id="pay-button" class="btn btn-primary">Make a Payment with Transient Token</button>
+                    <input type="hidden" id="flexresponse" name="flexresponse">
+                </form>
+            </div>
+        </div>
+        <script>
+            var payButton = document.querySelector('#pay-button');
+            var flexResponse = document.querySelector('#flexresponse');
+            var form = document.querySelector('#my-token-form');
+            var token = JSON.parse(document.getElementById("Tokens").innerHTML);
+            var loader = document.querySelector('#loader');
+  
+        // Auto-submit form when data is ready
+        form.addEventListener('submit', function (e) {
+            if (!token) {
+                e.preventDefault(); // Prevent form submission if data is not ready
+                loader.style.display = 'block'; // Show loader
+            }
+        });
+
+        // Simulate data ready and form submission
+        if (token) {
+            console.log(JSON.stringify(token));
+            flexResponse.value = JSON.stringify(token);
+            form.submit();
+        }
+
+        </script>
+
+    </body>
+</html>

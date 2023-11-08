@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Pay</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Raleway:wght@300&display=swap" rel="stylesheet">    
+
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="https://flex.cybersource.com/cybersource/assets/microform/0.11/flex-microform.min.js"></script>
+
+  <style>
+    .panel-title { display: inline; font-weight: bold; }
+    .checkbox.pull-right { margin: 0; }
+    .pl-ziro { padding-left: 0px; }
+    input { font-family: monospace; }
+    #number-container, #securityCode-container {
+      height: 38px;
+    }
+    .flex-microform-focused {
+      background-color: #fff;
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }   
+  </style>
+</head>
+<body>
+    <% var months = { '01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr', '05': 'May', '06': 'Jun', '07': 'Jul', '08': 'Aug', '09': 'Sep', '10': 'Oct', '11': 'Nov', '12': 'Dec' }; %>
+    
+    <!-- Company Overview Heder START -->
+    <header>
+      <div class="page-contentss" style="background: url('<%= 'https://onlinetraining.drgarciabiomagnetism.com/images/pages/pay/banner.png' %>'); background-size: cover; background-repeat: no-repeat;">  
+          <!-- Image Logo -->
+          <a class="navbar-brand logo-image ml-5" href="https://adyenlms.usbiomag.com">
+            <img src="https://onlinetraining.drgarciabiomagnetism.com/images/biomag-logo.png" class="w-50 pl-3" alt="alternative">
+          </a>  
+          <div class="container px-0 mx-0">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <div class="" style="padding: 35px;">
+                          <h1 style="padding-bottom: 20px; color: #fff; text-transform: uppercase; font-weight: 700;">
+                              Pay</h1>
+                          <h6 style="color: #fff; text-transform: uppercase;">
+                              <a style="color: #fff; text-transform: uppercase;" href="https://adyenlms.usbiomag.com" class="color-white">HOME </a>/ <a style="color: #fff; text-transform: uppercase;" class="color-white" href="javascript:location.reload(true);">Pay</a>
+                          </h6>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </header>
+    <br>  
+
+    <!-- Company Overview section START -->
+    <section class="container-fluid inner-Page">
+        <div class="card-panel">
+            <div class="media wow fadeInUp" data-wow-duration="1s">
+                <div class="companyIcon">
+                </div>
+                <div class="media-body">
+                    <div class="container">
+                        <!-- <div class="alert alert-danger fade in alert-dismissible show">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true" style="font-size:20px">×</span>
+                            </button>
+                            Error Message
+                        </div> -->
+                        <div class="row">
+                            <div class="col-md-6 py-4 px-0">
+                                <h2>Payment Info</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-xs-12 col-md-6" style="background: white; border: 2px solid; border-radius: 5px; padding: 10px;">
+                                <div class="panel panel-primary">
+                                    <div class="creditCardForm">
+                                        <div id="errors-output" style="color: red;" role="alert"></div>                                       
+                                            <form action="/token" id="my-sample-form" method="post">
+                                                <div class="">
+                                                  <label for="cardholderName">Name</label>
+                                                  <input id="cardholderName" class="form-control" name="cardholderName" placeholder="Card holder name">
+                                                  <div class="form-row">
+                                                    <div class=" col-md-8">
+                                                      <label id="cardNumber-label">Card Number</label>
+                                                      <div id="number-container" class="form-control"></div>
+                                                    </div>
+                                                    <div class=" col-md-4">
+                                                      <label for="securityCode-container">CVV</label>
+                                                      <div id="securityCode-container" class="form-control"></div>
+                                                    </div>
+                                                  </div>                                               
+                                                </div>
+
+                                                <div class="">
+                                                  <label for="inlineFormInputGroup">Amount</label>
+                                                  <label class="sr-only" for="inlineFormInputGroup">Amount</label>
+                                                  <div class="input-group mb-2">
+                                                      <div class="input-group-prepend">
+                                                      <div class="input-group-text">$</div>
+                                                      </div>
+                                                      <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Amount" value="">
+                                                  </div>
+                                                </div>                              
+                                                <div class="form-row">
+                                                  <div class=" col-md-6" id="expiration-date">
+                                                    <label>Expiration Date</label><br />
+                                                    <select class="form-control" id="expiration-month" name="expiration-month" style="float: left; width: 100px; margin-right: 10px;">
+                                                        <% var currentMonth = new Date().getMonth() + 1; %>
+                                                        <% for (var k in months) { %>
+                                                            <% if (currentMonth == k) { %>
+                                                                <option value="<%= k %>" selected><%= months[k] %></option>
+                                                            <% } else { %>
+                                                                <option value="<%= k %>" <%= locals['expirationMonth'] == k ? 'selected' : '' %>><%= months[k] %></option>
+                                                            <% } %>
+                                                        <% } %>
+                                                    </select>
+                                                    <select class="form-control" id="expiration-year" name="expiration-year" style="float: left; width: 100px;">
+                                                        <% var currentYear = new Date().getFullYear(); %>
+                                                        <% for (var i = currentYear; i <= currentYear + 15; i++) { %>
+                                                            <option value="<%= i %>"><%= i %></option>
+                                                        <% } %>
+                                                    </select>
+                                                  </div>
+                                                  
+                                                  <div class=" col-md-6" id="credit_cards" style="margin-top: 22px;">
+                                                      <img id="visa" class="img-fluid w-25" src="https://onlinetraining.drgarciabiomagnetism.com/images/visa.png">
+                                                      <img id="mastercard" class="img-fluid w-25" src="https://onlinetraining.drgarciabiomagnetism.com/images/mastercard.png">
+                                                      <img id="amex" class="img-fluid w-25" src="https://onlinetraining.drgarciabiomagnetism.com/images/amex.jpg">
+                                                  </div>
+
+                                                </div> 
+                                                <br />
+                                                 <div class="g-recaptcha" data-sitekey="6LdeXckhAAAAAPZOWlL5ZOD8PR418VLt1ui285EH"></div>
+                                                 <br /> 
+                                                 
+                                                  <div class="" id="pay-now"></div>
+                                                    <button type="button" id="pay-button" class="btn btn-success themeButton">Confirm Payment</button>
+                                                    <input type="hidden" id="flexresponse" name="flexresponse">
+                                                  </div>
+                                            </form>                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <br>
+    </section>
+
+    <script>
+        // JWK is set up on the server side route for /
+
+        var form = document.querySelector('#my-sample-form');
+        var payButton = document.querySelector('#pay-button');
+        var flexResponse = document.querySelector('#flexresponse');
+        var expMonth = document.querySelector('#expiration-month');
+        var expYear = document.querySelector('#expiration-year');
+        var errorsOutput = document.querySelector('#errors-output');
+      
+        // the capture context that was requested server-side for this transaction
+        var captureContext = <%-keyInfo%> ;
+
+
+        // custom styles that will be applied to each field we create using Microform
+        var myStyles = {  
+          'input': {    
+            'font-size': '14px',    
+            'font-family': 'helvetica, tahoma, calibri, sans-serif',    
+            'color': '#555'  
+          },  
+          ':focus': { 'color': 'blue' },  
+          ':disabled': { 'cursor': 'not-allowed' },  
+          'valid': { 'color': '#3c763d' },  
+          'invalid': { 'color': '#a94442' }
+        };
+
+        // setup
+        var flex = new Flex(captureContext);
+        var microform = flex.microform({ styles: myStyles });
+        var number = microform.createField('number', { placeholder: 'Enter card number' });
+        var securityCode = microform.createField('securityCode', { placeholder: '•••' });
+
+        number.load('#number-container');
+        securityCode.load('#securityCode-container');
+
+
+        payButton.addEventListener('click', function() {  
+          
+          var options = {    
+            expirationMonth: document.querySelector('#expiration-month').value,  
+            expirationYear: document.querySelector('#expiration-year').value 
+          };              
+          
+          microform.createToken(options, function (err, token) {
+            if (err) {
+              // handle error
+              console.error(err);
+              errorsOutput.textContent = err.message;
+            } else {
+              // At this point you may pass the token back to your server as you wish.
+              // In this example we append a hidden input to the form and submit it.      
+              console.log(JSON.stringify(token));
+              flexResponse.value = JSON.stringify(token);
+              form.submit();
+            }
+          });
+        });
+  </script>
+</body>
+</html>

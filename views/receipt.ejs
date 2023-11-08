@@ -1,0 +1,199 @@
+<html lang="en">
+  <head>
+    <title>Payment Details</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+      integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      .td-1 {
+        word-break: break-all;
+        word-wrap: break-word;
+      }
+    </style>
+  </head>
+
+  <body>
+        <!-- Company Overview Heder START -->
+        <header>
+            <div class="page-contentss" style="background: url('<%= 'https://onlinetraining.drgarciabiomagnetism.com/images/pages/pay/banner.png' %>'); background-size: cover; background-repeat: no-repeat;">  
+                <!-- Image Logo -->
+                <a class="navbar-brand logo-image ml-5" href="https://adyenlms.usbiomag.com">
+                  <img src="https://onlinetraining.drgarciabiomagnetism.com/images/biomag-logo.png" class="w-50 pl-3" alt="alternative">
+                </a>  
+                <div class="container px-0 mx-0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="" style="padding: 35px;">
+                                <h1 style="padding-bottom: 20px; color: #fff; text-transform: uppercase; font-weight: 700;">
+                                    Payment Details</h1>
+                                <h6 style="color: #fff; text-transform: uppercase;">
+                                    <a style="color: #fff; text-transform: uppercase;" href="https://adyenlms.usbiomag.com" class="color-white">HOME </a>/ <a style="color: #fff; text-transform: uppercase;" class="color-white" href="javascript:location.reload(true);">Payment Details</a>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </header>
+          <br> 
+    <div class="container card">
+      <div class="card-body">
+        <h1>Receipt</h1>
+        <table class="table">
+          <thead>
+           
+          </thead>
+          <tbody id="success_tbody">
+            <tr scope="row">
+                <td style="font-weight: 900; color: green;" >Transaction Response</td>
+                <td id="responsedata" hidden><%= paymentResponse %></td>
+              </tr>
+            <tr scope="row">
+                <td>ID:</td>
+                <td id="ID"></td>
+            </tr>
+            <tr scope="row">
+                <td>Submit Time (UTC):</td>
+                <td id="SubmitTime"></td>
+            </tr>
+            <tr scope="row">
+                <td>Status:</td>
+                <td id="Status"></td>
+            </tr>
+            <tr scope="row">
+                <td>Reconciliation ID:</td>
+                <td id="ReconciliationID"></td>
+            </tr>
+            <tr scope="row">
+                <td>Client Reference Code:</td>
+                <td id="ClientReferenceCode"></td>
+            </tr>
+            <tr scope="row">
+                <td style="font-weight: 900; color: green;">Processor Information:</td>
+            </tr>
+            <tr scope="row">
+                <td>- Approval Code:</td>
+                <td id="ApprovalCode"></td>
+            </tr>
+            <tr scope="row">
+                <td>- Transaction ID:</td>
+                <td id="TransactionID"></td>
+            </tr>
+            <tr scope="row">
+                <td>- Network Transaction ID:</td>
+                <td id="NetworkTransactionID"></td>
+            </tr>
+            <tr scope="row">
+                <td>- Response Code:</td>
+                <td id="ResponseCode"></td>
+            </tr>
+            <tr scope="row">
+                <td>- AVS Code:</td>
+                <td id="AVSCode"></td>
+            </tr>
+            <tr scope="row">
+                <td style="font-weight: 900; color: green;">Payment Information:</td>
+            </tr>
+            <tr scope="row">
+                <td>- Card:</td>
+                <td id="Card"></td>
+            </tr>
+            <tr scope="row">
+                <td>- Tokenized Card Type:</td>
+                <td id="TokenizedCardType"></td>
+            </tr>
+            <tr scope="row">
+                <td style="font-weight: 900; color: green;">Order Information:</td>
+            </tr>
+            <tr scope="row">
+                <td>- Authorized Amount:</td>
+                <td id="AuthorizedAmount"></td>
+            </tr>
+            <tr scope="row">
+                <td>- Currency:</td>
+                <td id="Currency"></td>
+            </tr>
+            <tr scope="row">
+                <td style="font-weight: 900; color: green;">Point of Sale Information:</td>
+            </tr>
+            <tr scope="row">
+                <td>- Terminal ID:</td>
+                <td id="TerminalID"></td>
+            </tr>
+        </tbody>          
+        <tbody id="failure_tboby">
+            <tr scope="row">
+              <td style="font-weight: 900; color: red;">Transaction Response</td>
+              <td id="responsedata"><%= paymentResponse %></td>
+            </tr>
+            <tr scope="row">
+              <td>Transaction ID</td>
+              <td id="TransactionID"></td>
+            </tr>
+            <tr scope="row">
+              <td>Transaction Status</td>
+              <td id="TransactionStatus"></td>
+            </tr>
+            <tr scope="row">
+              <td>Error Reason</td>
+              <td id="ErrorReason"></td>
+            </tr>
+            <tr scope="row">
+              <td>Error Message</td>
+              <td id="ErrorMessage"></td>
+            </tr>
+            <tr scope="row">
+              <td>Client Reference Information</td>
+              <td id="ClientReferenceInformation"></td>
+            </tr>
+          </tbody>
+        </table>
+        <a href="/checkout" class="btn btn-primary">Repeat checkout process</a>
+      </div>
+    </div>
+
+    <script>
+      var Res = JSON.parse(document.getElementById("responsedata").innerHTML);
+
+      if (Res.status === "AUTHORIZED") {
+        document.getElementById('success_tbody').style.display='block';
+        document.getElementById('failure_tboby').style.display='none'
+
+        document.getElementById("ID").textContent = Res.id;
+        document.getElementById("SubmitTime").textContent = Res.submitTimeUtc;
+        document.getElementById("Status").textContent = Res.status;
+        document.getElementById("ReconciliationID").textContent = Res.reconciliationId;
+        document.getElementById("ClientReferenceCode").textContent = Res.clientReferenceInformation.code;
+        document.getElementById("ApprovalCode").textContent = Res.processorInformation.approvalCode;
+        document.getElementById("TransactionID").textContent = Res.processorInformation.transactionId;
+        document.getElementById("NetworkTransactionID").textContent = Res.processorInformation.networkTransactionId;
+        document.getElementById("ResponseCode").textContent = Res.processorInformation.responseCode;
+        document.getElementById("AVSCode").textContent = Res.processorInformation.avs.code;
+        document.getElementById("Card").textContent = Res.paymentInformation.card;
+        document.getElementById("TokenizedCardType").textContent = Res.paymentInformation.tokenizedCard.type;
+        document.getElementById("AuthorizedAmount").textContent = Res.orderInformation.amountDetails.authorizedAmount;
+        document.getElementById("Currency").textContent = Res.orderInformation.amountDetails.currency;
+        document.getElementById("TerminalID").textContent = Res.pointOfSaleInformation.terminalId;
+
+      }else{
+        document.getElementById('success_tbody').style.display='none';
+        document.getElementById('failure_tboby').style.display='block';
+
+        document.getElementById('TransactionID').innerHTML = Res.id;
+        document.getElementById('TransactionStatus').innerHTML = Res.status;
+        document.getElementById('ErrorReason').innerHTML = Res.errorInformation.reason;
+        document.getElementById('ErrorMessage').innerHTML = Res.errorInformation.message;
+        document.getElementById('ClientReferenceInformation').innerHTML = Res.clientReferenceInformation.code;
+      }
+    </script>
+  </body>
+</html>
